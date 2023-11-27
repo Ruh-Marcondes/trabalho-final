@@ -1,15 +1,18 @@
 #include <stdio.h>
-
+#include <stdlib.h>
 int main() {
-    typedef struct {
-        int codigo;
-        char titulo[100];
-        char autor[50];
-        int emprestado; // 0 para disponível, 1 para emprestado
-    } Livro;
-
+    FILE * fp = NULL;
+    int ch;
+    printf("Abrindo arquivo chamado frutas.txt \n");
+    fp = fopen("projeto-final/frutas.txt", "r");
+    if(fp == NULL){
+        printf("Caminho errado ou arquivo inexistente, confira\n");
+        exit(1);
+    }
+    while((ch=fgetc(fp))!=EOF){
+        putchar(ch);
+    }
+    printf("\nDados disponiveis no momento foram impresso acima\n");
+    fclose(fp);
     return 0;
-}
-void cadastrarLivro(Livro* livros, int* totalLivros){
-
 }
