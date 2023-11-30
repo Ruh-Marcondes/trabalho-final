@@ -102,7 +102,7 @@ void listarTodososLivros(Livro* livros,int totalLivros){
 // mostra todos os livros
 }
 void salvarDados(Livro* livros, int totalLivros) {
-    FILE *fp = fopen("todosOsLivros.txt", "w");
+    FILE *fp = fopen("projeto-final\\output\\todosOsLivros.txt", "w");
     if (fp == NULL) {
         printf("Erro ao abrir o arquivo para escrita.\n");
         exit(1);
@@ -116,7 +116,7 @@ void salvarDados(Livro* livros, int totalLivros) {
 }
 
 void carregarDados(Livro* livros, int* totalLivros) {
-    FILE *fp = fopen("todosOsLivros.txt", "r");
+    FILE *fp = fopen("projeto-final\\output\\todosOsLivros.txt", "r");
     if (fp == NULL) {
         printf("Arquivo de dados nao encontrado. Criando novo arquivo.\n");
         return;
