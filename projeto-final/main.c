@@ -148,6 +148,7 @@ void emprestarLivro(Livro *livros, int totalLivros)
         printf("\nOpção Inválida\n");
         break;
     }
+    
     // if (encontrado==1 && livros->emprestado==0)
     // {
     //      printf("ISBN: %d \nTítulo: %s, \n Autor: %s \n", livros[i].isbn, livros[i].titulo, livros[i].autor);
