@@ -1,35 +1,23 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include "BIBLIOTECA.h"
+
 
 void cadastrarLivro(Livro *livros, int *totalLivros);
 void emprestarLivro(Livro *livros, int totalLivros);
 void devolverLivro(Livro *livros, int totalLivros);
 void listarEmprestados(Livro *livros, int totalLivros);
-void salvarDados(Livro *livros, int totalLivros);
-void carregarDados(Livro *livros, int *totalLivros);
 void listarTodososLivros(Livro *livros, int totalLivros);
 
-typedef struct
-{
-    int codigo;
-    int isbn;
-    char titulo[MAX_CARACTERE];
-    char autor[MAX_CARACTERE];
-    int emprestado; // 0 para disponível, 1 para emprestado
-} Livro;
 
 int main()
 {
-    Livro biblioteca[MAX_LIVROS]; // Assumindo um máximo de 100 livros na biblioteca
+    Livro biblioteca[MAX_LIVROS]; 
     int totalLivros = 0;
     int opcao;
 
-    // Isso é muito importatante carregar os livros primeiro;
-    carregarDados(biblioteca, &totalLivros); // Carregar dados do arquivo
+   
+    carregarDados(&biblioteca, &totalLivros); 
 
-    do
+     do
     {
         menu();
         scanf("%d", &opcao);
@@ -52,7 +40,6 @@ int main()
             listarTodososLivros(biblioteca, totalLivros);
             break;
         case 0:
-
             printf("Saindo do programa.\n");
             break;
         default:
@@ -61,6 +48,7 @@ int main()
     } while (opcao != 0);
 
     return 0;
+
 }
 
 void menu()
@@ -78,7 +66,6 @@ void menu()
 void cadastrarLivro(Livro *livros, int *totalLivros)
 {
     // Carregar dados existentes antes de cadastrar um novo livro
-    carregarDados(livros, totalLivros);
 
     printf("Cadastrar Livro:\n");
 
@@ -110,7 +97,7 @@ void emprestarLivro(Livro *livros, int totalLivros)
     printf("3. Titulo\n");
 
     int opcBusca = 0;
-    int encontrado =0;
+   // int encontrado = 0;
     scanf("%d", &opcBusca);
 
     switch (opcBusca)
@@ -130,8 +117,8 @@ void emprestarLivro(Livro *livros, int totalLivros)
                 {
                     printf("\nPorém não está disponivel");
                 }
-                break; 
-                //Até aqui ok
+                break;
+                // Até aqui ok
             }
         }
 
@@ -146,12 +133,11 @@ void emprestarLivro(Livro *livros, int totalLivros)
         printf("\nOpção Inválida\n");
         break;
     }
-    
+
     // if (encontrado==1 && livros->emprestado==0)
     // {
     //      printf("ISBN: %d \nTítulo: %s, \n Autor: %s \n", livros[i].isbn, livros[i].titulo, livros[i].autor);
     // }
-    
 }
 
 void devolverLivro(Livro *livros, int totalLivros)
@@ -170,6 +156,7 @@ void listarEmprestados(Livro *livros, int totalLivros)
         if (livros[i].emprestado == 1)
 
             printf("ISBN: %d \nTítulo: %s, \n Autor: %s \n", livros[i].isbn, livros[i].titulo, livros[i].autor);
+            printf("\n\n\n");
     }
     printf("\n==============================================\n");
 }
@@ -182,6 +169,7 @@ void listarTodososLivros(Livro *livros, int totalLivros)
     for (int i = 0; i < totalLivros; i++)
     {
         printf("ISBN: %d, \nTítulo: %s, \n Autor: %s,\n Emprestado: %s\n", livros[i].isbn, livros[i].titulo, livros[i].autor, (livros[i].emprestado == 1) ? "Sim" : "Não");
+         printf("\n\n\n");
     }
     printf("\n==============================================\n");
 }

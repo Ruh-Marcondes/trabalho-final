@@ -1,4 +1,5 @@
 #ifndef BIBLIOTECA_H
+
 #define BIBLIOTECA_H
 
 //  includes necessários
@@ -9,6 +10,17 @@
 // Definições de constantes globais
 #define MAX_LIVROS 100
 #define MAX_CARACTERE 250
+
+// Definição da estrutura Livro
+typedef struct
+{
+    int codigo;
+    int isbn;
+    char titulo[250];
+    char autor[250];
+    int emprestado; // 0 para disponível, 1 para emprestado
+} Livro;
+
 
 // Protótipos das funções
 
