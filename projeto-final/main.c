@@ -24,7 +24,7 @@ void menu(void);
 
 int main()
 {
-    Livro biblioteca[100]; // Assumindo um máximo de 100 livros na biblioteca
+    Livro biblioteca[MAX_LIVarMAX_LIVROS]; // Assumindo um máximo de 100 livros na biblioteca
     int totalLivros = 0;
     int opcao;
 
