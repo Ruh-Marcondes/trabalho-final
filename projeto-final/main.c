@@ -1,17 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-const int MAX_LIVROS = 100;
-
-typedef struct
-{
-    int codigo;
-    int isbn;
-    char titulo[250]; // não funciona se coloca um const
-    char autor[250];  // não funciona se coloca um const
-    int emprestado;   // 0 para disponível, 1 para emprestado
-} Livro;
+#include "BIBLIOTECA.h"
 
 void cadastrarLivro(Livro *livros, int *totalLivros);
 void emprestarLivro(Livro *livros, int totalLivros);
@@ -20,11 +10,19 @@ void listarEmprestados(Livro *livros, int totalLivros);
 void salvarDados(Livro *livros, int totalLivros);
 void carregarDados(Livro *livros, int *totalLivros);
 void listarTodososLivros(Livro *livros, int totalLivros);
-void menu(void);
+
+typedef struct
+{
+    int codigo;
+    int isbn;
+    char titulo[MAX_CARACTERE];
+    char autor[MAX_CARACTERE];
+    int emprestado; // 0 para disponível, 1 para emprestado
+} Livro;
 
 int main()
 {
-    Livro biblioteca[MAX_LIVarMAX_LIVROS]; // Assumindo um máximo de 100 livros na biblioteca
+    Livro biblioteca[MAX_LIVROS]; // Assumindo um máximo de 100 livros na biblioteca
     int totalLivros = 0;
     int opcao;
 

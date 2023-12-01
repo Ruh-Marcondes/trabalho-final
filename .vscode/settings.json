@@ -1,0 +1,7 @@
+{
+    "cmake.sourceDirectory": "C:/Users/Ruahma/Documents/trabalho-final/projeto-final",
+    "editor.defaultFormatter": "vscode.json-language-features",
+    "[cpp]": {
+        "editor.defaultFormatter": "ms-vscode.cpptools"
+    }
+}
