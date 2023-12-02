@@ -1,20 +1,12 @@
 #include "BIBLIOTECA.h"
-#include <locale.h>
-
-void cadastrarLivro(Livro *livros, int *totalLivros);
-void emprestarLivro(Livro *livros, int totalLivros);
-void devolverLivro(Livro *livros, int totalLivros);
-void listarEmprestados(Livro *livros, int totalLivros);
-void listarTodososLivros(Livro *livros, int totalLivros);
 
 int main()
 {
-    setlocale(LC_ALL, "Portuguese_Brazil");
+
     Livro biblioteca[MAX_LIVROS];
     int totalLivros = 0;
     int opcao;
-
-    carregarDados(&biblioteca, &totalLivros);
+    carregarDados(biblioteca, &totalLivros);
 
     do
     {
@@ -42,7 +34,7 @@ int main()
             printf("Saindo do programa.\n");
             break;
         default:
-            printf("OpÁ„o  Inv·lida. Tente novamente.\n");
+            printf("Op√ß√£o  Inv√°lida. Tente novamente.\n");
         }
     } while (opcao != 0);
 
@@ -59,132 +51,40 @@ void menu()
     printf("5. Listar todos os Livros\n");
     printf("0. Sair\n");
 
-    printf("Escolha uma opÁ„o: ");
+    printf("Escolha uma op√ß√£o: ");
 }
 void cadastrarLivro(Livro *livros, int *totalLivros)
-{printf("Cadastrar Livro:\n");
+{
+    printf("Cadastrar Livro:\n");
 
-    // Calcular o prÛximo cÛdigo como o total atual de livros mais 1
+    // Calcular o pr√≥ximo c√≥digo como o total atual de livros mais 1
     livros[*totalLivros].codigo = *totalLivros + 1;
 
     printf("ISBN: ");
-    scanf(" %d", &livros[*totalLivros].isbn);
+    limparBufferEntrada();
+    scanf("%d", &livros[*totalLivros].isbn);
 
-    printf("TÌtulo: ");
+    printf("T√≠tulo: ");
+    limparBufferEntrada();
     scanf(" %[^\n]", livros[*totalLivros].titulo);
 
     printf("Autor: ");
+    limparBufferEntrada();
     scanf(" %[^\n]", livros[*totalLivros].autor);
 
-    livros[*totalLivros].emprestado = 0; // Inicializa como disponÌvel
+    livros[*totalLivros].emprestado = 0; // Inicializa como dispon√≠vel
     (*totalLivros)++;
     salvarDados(livros, *totalLivros);
     printf("Livro cadastrado com sucesso!\n");
 }
 
-void emprestarLivro(Livro *livros, int totalLivros)
-{
-    // mudar a val do emprestado pra 1 e precisa verificar se j√° n√£o est√° emprestado;
-
-    printf("Escolha o metÈdo de buscas:");
-    printf("1. ISBN\n");
-    printf("2. Autor\n");
-    printf("3. Titulo\n");
-
-    int opcBusca = 0;
-    // int encontrado = 0;
-    scanf("%d", &opcBusca);
-
-    switch (opcBusca)
-    {
-    case 1:
-        printf("\nDigite o ISBN: ");
-        int isbnn;
-        scanf("%d", &isbnn);
-
-        for (int i = 0; i < totalLivros; i++)
-        {
-            if (livros[i].isbn == isbnn)
-            {
-                printf("\nLivro encontrado!!\n");
-
-                if (livros[i].emprestado == 1)
-                {
-                    printf("\nPorÈm n„o est· disponivel");
-                }
-                break;
-                // At√© aqui ok
-            }
-        }
-
-        break;
-    case 2:
-        /* code */
-        break;
-    case 3:
-        /* code */
-        break;
-    default:
-        printf("\n OpÁ„o Inv·lida\n ");
-        break;
-    }
-
-    // if (encontrado==1 && livros->emprestado==0)
-    // {
-    //      printf("ISBN: %d \nT√≠tulo: %s, \n Autor: %s \n", livros[i].isbn, livros[i].titulo, livros[i].autor);
-    // }
+void emprestarLivro(Livro *livros, int totalLivros){
+    //@JuhManuh2004 est√° desenvolvendo
 }
-
 void devolverLivro(Livro *livros, int totalLivros)
 {
     // mudar a val do emprestado pra 0
-    printf("Escolha o mÈtodo de buscas:");
-    printf("1. ISBN\n");
-    printf("2. Autor\n");
-    printf("3. TÌtulo\n");
-
-    int opcBusca = 0;
-    int isbnn;
-    int encontrado = 0;
-    int posicao;
-
-    scanf("%d", &opcBusca);
-
-    switch (opcBusca)
-    {
-    case 1:
-        printf("\nDigite o ISBN: ");
-
-        scanf("%d", &isbnn);
-
-        for (int i = 0; i < totalLivros; i++)
-        {
-            if (livros[i].isbn == isbnn)
-            {
-                printf("\nLivro encontrado!!\n");
-                encontrado = 1;
-                posicao = i;
-                break;
-                // At√© aqui ok
-            }
-        }
-
-        break;
-    case 2:
-        /* code */
-        break;
-    case 3:
-        /* code */
-        break;
-    default:
-        printf("\n OpÁ„o Inv·lida\n");
-        break;
-    }
-
-    if (encontrado == 1)
-    {
-        printf("ISBN: %d \nTÌtulo: %s, \n Autor: %s \n", livros[posicao].isbn, livros[posicao].titulo, livros[posicao].autor);
-    }
+   //Criar uma func n√£o emprestados
 }
 
 void listarEmprestados(Livro *livros, int totalLivros)
@@ -192,12 +92,14 @@ void listarEmprestados(Livro *livros, int totalLivros)
 
     printf("\n==============================================\n");
     printf("\n\n----Todos os Livros Emprestados----\n\n");
-    // mostrar os livros de val emprestado = 1
+
     for (int i = 0; i < totalLivros; i++)
     {
         if (livros[i].emprestado == 1)
-
-            printf("ISBN: %d \nTÌtulo: %s, \n Autor: %s \n", livros[i].isbn, livros[i].titulo, livros[i].autor);
+        {
+            printf("\n%d¬∞. Livro\n", i + 1);
+            printf("ISBN: %d \nT√≠tulo: %s, \nAutor: %s \n", livros[i].isbn, livros[i].titulo, livros[i].autor);
+        }
         printf("\n\n\n");
     }
     printf("\n==============================================\n");
@@ -205,39 +107,42 @@ void listarEmprestados(Livro *livros, int totalLivros)
 
 void listarTodososLivros(Livro *livros, int totalLivros)
 {
-    // mostra todos os livros
+
     printf("\n==============================================\n");
     printf("\n\n----Todos os Livros----\n\n");
     for (int i = 0; i < totalLivros; i++)
     {
-        printf("ISBN: %d, \nTÌtulo: %s, \n Autor: %s,\n Emprestado: %s\n", livros[i].isbn, livros[i].titulo, livros[i].autor, (livros[i].emprestado == 1) ? "Sim" : "N„o");
+        printf("\n%d¬∞. Livro\n", i + 1);
+        printf("ISBN: %d, \nT√≠tulo: %s, \n Autor: %s,\n Emprestado: %s\n", livros[i].isbn, livros[i].titulo, livros[i].autor, (livros[i].emprestado == 1) ? "Sim" : "NÔøΩo");
         printf("\n\n\n");
     }
     printf("\n==============================================\n");
 }
+
 void salvarDados(Livro *livros, int totalLivros)
 {
-    FILE *fp = fopen("todosOsLivros.txt", "w");
+      
+
+    FILE *fp = fopen("todosOsLivros.txt", "a");
     if (fp == NULL)
     {
         printf("Erro ao abrir o arquivo para escrita.\n");
         exit(1);
     }
 
-    for (int i = 1; i < totalLivros; i++)
+    for (int i = 0; i < totalLivros; i++)
     {
         fprintf(fp, "%d;%d;%s;%s;%d\n", livros[i].codigo, livros[i].isbn, livros[i].titulo, livros[i].autor, livros[i].emprestado);
     }
 
     fclose(fp);
 }
-
 void carregarDados(Livro *livros, int *totalLivros)
 {
     FILE *fp = fopen("todosOsLivros.txt", "r");
     if (fp == NULL)
     {
-        printf("Arquivo de dados n„o encontrado. Criando novo arquivo.\n");
+        printf("Arquivo de dados n√£o encontrado. Criando novo arquivo.\n");
         fp = fopen("todosOsLivros.txt", "w");
         if (fp == NULL)
         {
@@ -248,7 +153,6 @@ void carregarDados(Livro *livros, int *totalLivros)
         return;
     }
 
-    // Limpa o array antes de carregar os dados
     *totalLivros = 0;
 
     while (fscanf(fp, "%d;%d;%[^;];%[^;];%d\n", &livros[*totalLivros].codigo, &livros[*totalLivros].isbn, livros[*totalLivros].titulo, livros[*totalLivros].autor, &livros[*totalLivros].emprestado) == 5)
@@ -258,6 +162,11 @@ void carregarDados(Livro *livros, int *totalLivros)
 
     fclose(fp);
 
-    // Adicione mensagens de depura√ß√£o
     printf("Dados carregados com sucesso. Total de livros: %d\n", *totalLivros);
+}
+
+void limparBufferEntrada()
+{
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
 }
