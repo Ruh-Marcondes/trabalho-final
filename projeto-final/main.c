@@ -81,15 +81,25 @@ void cadastrarLivro(Livro *livros, int *totalLivros)
 void emprestarLivro(Livro *livros, int totalLivros){
     //@JuhManuh2004 está desenvolvendo
 }
+
 void devolverLivro(Livro *livros, int totalLivros)
 {
     // mudar a val do emprestado pra 0
-   listarEmprestados();
-   
+
+    listarEmprestados(livros,totalLivros);
+    int indiceLivro=0; 
+    printf("\n\nEscolha o livro que deseja devolver pelo codigo dele: ");
+    scanf("%d",&indiceLivro);
+    
+    livros[indiceLivro-1].emprestado = 0;
+    salvarDados(livros,totalLivros);
+    printf("\n\nLivro Devolvido!");
 }
 
 void listarEmprestados(Livro *livros, int totalLivros)
 {
+
+int emprestados =0;
 
     printf("\n==============================================\n");
     printf("\n\n----Todos os Livros Emprestados----\n\n");
@@ -98,7 +108,8 @@ void listarEmprestados(Livro *livros, int totalLivros)
     {
         if (livros[i].emprestado == 1)
         {
-            printf("\n%d°. Livro\n", i + 1);
+            printf("\n\n%d°. Livro", ++emprestados);
+            printf("\n Codigo de cadastro do livro: %d \n", livros[i].codigo);
             printf("ISBN: %s \nTítulo: %s, \nAutor: %s \n", livros[i].isbn, livros[i].titulo, livros[i].autor);
         }
         printf("\n\n\n");
