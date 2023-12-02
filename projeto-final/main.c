@@ -62,7 +62,7 @@ void cadastrarLivro(Livro *livros, int *totalLivros)
 
     printf("ISBN: ");
     limparBufferEntrada();
-    scanf("%d", &livros[*totalLivros].isbn);
+    scanf(" %[^\n]", livros[*totalLivros].isbn);
 
     printf("Título: ");
     limparBufferEntrada();
@@ -73,8 +73,8 @@ void cadastrarLivro(Livro *livros, int *totalLivros)
     scanf(" %[^\n]", livros[*totalLivros].autor);
 
     livros[*totalLivros].emprestado = 0; // Inicializa como disponível
+    salvarDados(livros, *totalLivros+1);
     (*totalLivros)++;
-    salvarDados(livros, *totalLivros);
     printf("Livro cadastrado com sucesso!\n");
 }
 
@@ -84,7 +84,8 @@ void emprestarLivro(Livro *livros, int totalLivros){
 void devolverLivro(Livro *livros, int totalLivros)
 {
     // mudar a val do emprestado pra 0
-   //Criar uma func não emprestados
+   listarEmprestados();
+   
 }
 
 void listarEmprestados(Livro *livros, int totalLivros)
@@ -98,7 +99,7 @@ void listarEmprestados(Livro *livros, int totalLivros)
         if (livros[i].emprestado == 1)
         {
             printf("\n%d°. Livro\n", i + 1);
-            printf("ISBN: %d \nTítulo: %s, \nAutor: %s \n", livros[i].isbn, livros[i].titulo, livros[i].autor);
+            printf("ISBN: %s \nTítulo: %s, \nAutor: %s \n", livros[i].isbn, livros[i].titulo, livros[i].autor);
         }
         printf("\n\n\n");
     }
@@ -113,7 +114,7 @@ void listarTodososLivros(Livro *livros, int totalLivros)
     for (int i = 0; i < totalLivros; i++)
     {
         printf("\n%d°. Livro\n", i + 1);
-        printf("ISBN: %d, \nTítulo: %s, \n Autor: %s,\n Emprestado: %s\n", livros[i].isbn, livros[i].titulo, livros[i].autor, (livros[i].emprestado == 1) ? "Sim" : "N�o");
+        printf("ISBN: %s, \nTítulo: %s, \n Autor: %s,\n Emprestado: %s\n", livros[i].isbn, livros[i].titulo, livros[i].autor, (livros[i].emprestado == 1) ? "Sim" : "Não");
         printf("\n\n\n");
     }
     printf("\n==============================================\n");
@@ -121,9 +122,7 @@ void listarTodososLivros(Livro *livros, int totalLivros)
 
 void salvarDados(Livro *livros, int totalLivros)
 {
-      
-
-    FILE *fp = fopen("todosOsLivros.txt", "a");
+    FILE *fp = fopen("todosOsLivros.txt", "w");
     if (fp == NULL)
     {
         printf("Erro ao abrir o arquivo para escrita.\n");
@@ -132,11 +131,19 @@ void salvarDados(Livro *livros, int totalLivros)
 
     for (int i = 0; i < totalLivros; i++)
     {
-        fprintf(fp, "%d;%d;%s;%s;%d\n", livros[i].codigo, livros[i].isbn, livros[i].titulo, livros[i].autor, livros[i].emprestado);
+        fprintf(fp, "%d;", livros[i].codigo);
+        fputs(livros[i].isbn, fp);
+        fputs(";", fp);
+        fputs(livros[i].titulo, fp);
+        fputs(";", fp);
+        fputs(livros[i].autor, fp);
+        fprintf(fp, ";%d\n", livros[i].emprestado);
     }
 
     fclose(fp);
 }
+
+
 void carregarDados(Livro *livros, int *totalLivros)
 {
     FILE *fp = fopen("todosOsLivros.txt", "r");
@@ -155,7 +162,7 @@ void carregarDados(Livro *livros, int *totalLivros)
 
     *totalLivros = 0;
 
-    while (fscanf(fp, "%d;%d;%[^;];%[^;];%d\n", &livros[*totalLivros].codigo, &livros[*totalLivros].isbn, livros[*totalLivros].titulo, livros[*totalLivros].autor, &livros[*totalLivros].emprestado) == 5)
+    while (fscanf(fp, "%d;%[^;];%[^;];%[^;];%d\n", &livros[*totalLivros].codigo, &livros[*totalLivros].isbn, livros[*totalLivros].titulo, livros[*totalLivros].autor, &livros[*totalLivros].emprestado) == 5)
     {
         (*totalLivros)++;
     }

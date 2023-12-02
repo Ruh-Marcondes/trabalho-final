@@ -15,7 +15,7 @@
 typedef struct
 {
     int codigo;
-    int isbn;
+    char isbn[MAX_CARACTERE];
     char titulo[MAX_CARACTERE];
     char autor[MAX_CARACTERE];
     int emprestado; // 0 para disponível, 1 para emprestado
