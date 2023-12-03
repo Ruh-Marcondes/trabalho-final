@@ -78,10 +78,108 @@ void cadastrarLivro(Livro *livros, int *totalLivros)
     printf("Livro cadastrado com sucesso!\n");
 }
 
-void emprestarLivro(Livro *livros, int totalLivros){
-    //@JuhManuh2004 está desenvolvendo
+//Verificar livro cadastrado
+int verificarLivroCadastrado(Livro *livros, int totalLivros, int isbn) {
+    for (int i = 0; i < totalLivros; i++) {
+        if (livros[i].isbn == isbn) {
+            return i; // Retorna o índice do livro se estiver cadastrado
+        }
+    }
+    return -1; // Retorna -1 se o livro não estiver cadastrado
 }
 
+void emprestarLivro(Livro *livros, int totalLivros){
+   printf("Escolha o metódo de buscas:");
+    printf("1. ISBN\n");
+    printf("2. Autor\n");
+    printf("3. Titulo\n");
+
+    int opcBusca = 0;
+    int encontrado =0;
+    scanf("%d", &opcBusca);
+
+    switch (opcBusca)
+    {
+    case 1:
+        printf("\nDigite o ISBN: ");
+        int isbnn;
+        scanf("%d", &isbnn);
+
+        for (int i = 0; i < totalLivros; i++)
+        {
+            if (livros[i].isbn == isbnn)
+            {
+                printf("\nLivro encontrado!!\n");
+
+                if (livros[i].emprestado == 1)
+                {
+                    printf("\nPorém não está disponivel");
+                }
+                break; 
+                
+            }
+        } 
+}
+switch (opcBusca)
+    {
+    case 1:
+        printf("\nDigite o ISBN: ");
+        int isbnn;
+        scanf("%d", &isbnn);
+
+        for (int i = 0; i < totalLivros; i++)
+        {
+            if (livros[i].isbn == isbnn)
+            {
+                printf("\nLivro encontrado!!\n");
+
+                if (livros[i].emprestado == 1)
+                {
+                    printf("\nPorém não está disponivel");
+                }
+                break; 
+                //Até aqui ok
+            }
+        }
+
+        case 2:
+    printf("\nDigite o nome do autor: ");
+    char autorBusca[250];
+    scanf(" %[^\n]", autorBusca);
+
+    for (int i = 0; i < totalLivros; i++)
+    {
+        if (strcmp(livros[i].autor, autorBusca) == 0)
+        {
+            printf("\nLivro encontrado pelo autor!!\n");
+
+            if (livros[i].emprestado == 1)
+            {
+                printf("\nMas está indisponível.");
+            }
+            break; // Finaliza a busca após encontrar o livro
+        }
+    }
+    case 3:
+    printf("\nDigite o título do livro: ");
+    char tituloBusca[250];
+    scanf(" %[^\n]", tituloBusca);
+
+    for (int i = 0; i < totalLivros; i++)
+    {
+        if (strcmp(livros[i].titulo, tituloBusca) == 0)
+        {
+            printf("\nLivro encontrado pelo título!!\n");
+
+            if (livros[i].emprestado == 1)
+            {
+                printf("\nMas está indisponível.");
+            }
+            break; // Finaliza a busca após encontrar o livro
+        }
+    }
+    break;
+            
 void devolverLivro(Livro *livros, int totalLivros)
 {
     // mudar a val do emprestado pra 0
@@ -243,11 +341,7 @@ void emprestarLivroEscolhido(Livro *livros, int totalLivros, int indiceLivro)
 const int MAX_LIVROS = 100;
 
 typedef struct {
-    int codigo;
-    int isbn;
-    char titulo[250];
-    char autor[250];
-    int emprestado;
+    int livroCadastrado;
 } Livro;
 
 void listarLivros(Livro *livros, int totalLivros) {
@@ -272,43 +366,25 @@ int escolherLivro(Livro *livros, int totalLivros) {
     }
 }
 
-int main() {
-    Livro biblioteca[MAX_LIVROS];
-    int totalLivros = 0;
-    // Suponha que já exista o código para carregar os dados
-
     int opcao;
 
     do {
         printf("\nMenu:\n");
-        printf("1. Cadastrar Livro\n");
-        printf("2. Emprestar Livro\n");
-        printf("3. Devolver Livro\n");
-        printf("4. Listar Livros Emprestados\n");
-        printf("5. Listar todos os Livros\n");
-        printf("0. Sair\n");
+        printf("1. Achou! Alugue já seu livro: \n");
+        printf("2. Não está entre os cadastrado! \n");
         printf("Escolha uma opção: ");
         scanf("%d", &opcao);
 
         switch (opcao) {
             case 1:
-                // Chame a função para cadastrar um livro
-                break;
-            case 2: {
-                int indiceLivro = escolherLivro(biblioteca, totalLivros);
+            int indiceLivro = escolherLivro(biblioteca, totalLivros);
                 if (indiceLivro != -1) {
                     // Realize as operações de empréstimo aqui
                     printf("Você escolheu emprestar o livro: %s\n", biblioteca[indiceLivro].titulo);
                 }
                 break;
             }
-            case 3:
-                // Chame a função para devolver um livro
-                break;
-            case 4:
-                // Chame a função para listar os livros emprestados
-                break;
-            case 5:
+            case 2:
                 listarLivros(biblioteca, totalLivros); // Listar todos os livros
                 break;
             case 0:
@@ -321,6 +397,7 @@ int main() {
 
     return 0;
 }
+
 void salvarDados(Livro *livros, int totalLivros)
 {
     FILE *fp = fopen("todosOsLivros.txt", "w");
