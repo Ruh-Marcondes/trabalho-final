@@ -11,6 +11,7 @@
 #define MAX_LIVROS 100
 #define MAX_CARACTERE 250
 
+
 // Definição da estrutura Livro
 typedef struct
 {
@@ -59,6 +60,15 @@ void devolverLivro(Livro *livros, int totalLivros);
  **/
 void listarEmprestados(Livro *livros, int totalLivros);
 
+
+
+/**
+ * Função listarnaoemprestados(Livro *livros, int *totalLivros)
+ * Essa função Lista os livros  disponiveis para emprestimo.
+ *    @param livros Um ponteiro para o array de livros
+ *    @param totalLivros um ponteiro para o total de livros
+ **/
+void listarnaoemprestados(Livro *livros, int *totalLivros);
 
 /**
  * Função listarTodososLivros(Livro *livros, int *totalLivros)
