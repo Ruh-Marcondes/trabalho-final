@@ -77,12 +77,6 @@ void cadastrarLivro(Livro *livros, int *totalLivros)
     (*totalLivros)++;
     printf("Livro cadastrado com sucesso!\n");
 }
-void listarLivros(Livro *livros, int totalLivros) {
-    printf("Livros cadastrados:\n");
-    for (int i = 0; i < totalLivros; i++) {
-        printf("%d. ISBN: %d, Título: %s, Autor: %s\n", i + 1, livros[i].isbn, livros[i].titulo, livros[i].autor);
-    }
-}
 
 //Verificar livro cadastrado
 int verificarLivroCadastrado(Livro *livros, int totalLivros, int isbn) {
@@ -94,6 +88,12 @@ int verificarLivroCadastrado(Livro *livros, int totalLivros, int isbn) {
     return -1; // Retorna -1 se o livro não estiver cadastrado
 }
 
+void listarLivros(Livro *livros, int totalLivros) {
+    printf("Livros cadastrados:\n");
+    for (int i = 0; i < totalLivros; i++) {
+        printf("%d. ISBN: %d, Título: %s, Autor: %s\n", i + 1, livros[i].isbn, livros[i].titulo, livros[i].autor);
+    }
+}
 void emprestarLivro(Livro *livros, int totalLivros){
    printf("Escolha o metódo de buscas:");
     printf("1. ISBN\n");
