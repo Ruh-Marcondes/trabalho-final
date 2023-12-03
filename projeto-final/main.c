@@ -77,6 +77,12 @@ void cadastrarLivro(Livro *livros, int *totalLivros)
     (*totalLivros)++;
     printf("Livro cadastrado com sucesso!\n");
 }
+void listarLivros(Livro *livros, int totalLivros) {
+    printf("Livros cadastrados:\n");
+    for (int i = 0; i < totalLivros; i++) {
+        printf("%d. ISBN: %d, Título: %s, Autor: %s\n", i + 1, livros[i].isbn, livros[i].titulo, livros[i].autor);
+    }
+}
 
 //Verificar livro cadastrado
 int verificarLivroCadastrado(Livro *livros, int totalLivros, int isbn) {
@@ -288,30 +294,6 @@ typedef struct
 // ... (código anterior)
 
 void listarLivrosDisponiveis(Livro *livros, int totalLivros);
-void emprestarLivroEscolhido(Livro *livros, int totalLivros, int indiceLivro);
-
-// ... (código anterior)
-
-void emprestarLivro(Livro *livros, int totalLivros)
-{
-    printf("Livros disponíveis para empréstimo:\n");
-    listarLivrosDisponiveis(livros, totalLivros);
-
-    printf("Digite o número do livro para empréstimo: ");
-    int escolha;
-    scanf("%d", &escolha);
-
-    if (escolha >= 1 && escolha <= totalLivros)
-    {
-        emprestarLivroEscolhido(livros, totalLivros, escolha - 1);
-    }
-    else
-    {
-        printf("Escolha inválida.\n");
-    }
-}
-
-void listarLivrosDisponiveis(Livro *livros, int totalLivros)
 {
     for (int i = 0; i < totalLivros; i++)
     {
@@ -321,37 +303,7 @@ void listarLivrosDisponiveis(Livro *livros, int totalLivros)
         }
     }
 }
-
-void emprestarLivroEscolhido(Livro *livros, int totalLivros, int indiceLivro)
-{
-    if (livros[indiceLivro].emprestado == 1)
-    {
-        printf("Livro indisponível para empréstimo.\n");
-    }
-    else
-    {
-        livros[indiceLivro].emprestado = 1;
-        printf("Livro emprestado com sucesso!\n");
-        salvarDados(livros, totalLivros);
-    }
-}
-
-//escolher um dos livros baseado em livros já cadastrados: 
-
-const int MAX_LIVROS = 100;
-
-typedef struct {
-    int livroCadastrado;
-} Livro;
-
-void listarLivros(Livro *livros, int totalLivros) {
-    printf("Livros cadastrados:\n");
-    for (int i = 0; i < totalLivros; i++) {
-        printf("%d. ISBN: %d, Título: %s, Autor: %s\n", i + 1, livros[i].isbn, livros[i].titulo, livros[i].autor);
-    }
-}
-
-int escolherLivro(Livro *livros, int totalLivros) {
+    int escolherLivro(Livro *livros, int totalLivros) {
     listarLivros(livros, totalLivros);
 
     printf("\nEscolha um dos livros acima: ");
@@ -397,6 +349,49 @@ int escolherLivro(Livro *livros, int totalLivros) {
 
     return 0;
 }
+
+
+void emprestarLivro(Livro *livros, int totalLivros)
+{
+    printf("Livros disponíveis para empréstimo:\n");
+    listarLivrosDisponiveis(livros, totalLivros);
+
+    printf("Digite o número do livro para empréstimo: ");
+    int escolha;
+    scanf("%d", &escolha);
+
+    if (escolha >= 1 && escolha <= totalLivros)
+    {
+        emprestarLivroEscolhido(livros, totalLivros, escolha - 1);
+    }
+    else
+    {
+        printf("Escolha inválida.\n");
+    }
+}
+
+void emprestarLivroEscolhido(Livro *livros, int totalLivros, int indiceLivro)
+{
+    if (livros[indiceLivro].emprestado == 1)
+    {
+        printf("Livro indisponível para empréstimo.\n");
+    }
+    else
+    {
+        livros[indiceLivro].emprestado = 1;
+        printf("Livro emprestado com sucesso!\n");
+        salvarDados(livros, totalLivros);
+    }
+}
+
+//escolher um dos livros baseado em livros já cadastrados: 
+
+const int MAX_LIVROS = 100;
+
+typedef struct {
+    int livroCadastrado;
+} Livro;
+
 
 void salvarDados(Livro *livros, int totalLivros)
 {
