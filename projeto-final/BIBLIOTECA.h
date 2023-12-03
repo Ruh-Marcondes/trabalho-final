@@ -88,6 +88,14 @@ void carregarDados(Livro *livros, int *totalLivros);
 
 
 /**
+ * Função listarNaoEmprestados(Livro *livros, int *totalLivros)
+ Essa Lista os livros marcados como emprestado = 0
+ *    @param livros Um ponteiro para o array de livros
+ *    @param totalLivros um ponteiro para o total de livros
+ **/
+void listarNaoEmprestados(Livro *livros, int *totalLivros);
+
+/**
  * Função menu() constroi o menu de o opções na tela
  **/
 void menu(void);

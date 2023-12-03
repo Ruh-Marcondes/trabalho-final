@@ -1,4 +1,4 @@
 1;978-85-8041-503-2;Assasinato na casa do Pastor;Agatha Chistie;1
 2;978-85-250-5702-0;Os relogios;Agatha Christie;1
-3;123456;As cronicas de narnia;C.S.Lewis;0
+3;978-85-7827-069-8;As cronicas de narnia;C.S.Lewis;1
 4;978-85-426-0791-8;Sherlock O grande jogo;Steven Moffat;0

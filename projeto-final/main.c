@@ -30,6 +30,9 @@ int main()
         case 5:
             listarTodososLivros(biblioteca, totalLivros);
             break;
+            case 6:
+            listarNaoEmprestados(biblioteca,totalLivros);
+            break;
         case 0:
             printf("Saindo do programa.\n");
             break;
@@ -49,6 +52,7 @@ void menu()
     printf("3. Devolver Livro\n");
     printf("4. Listar Livros Emprestados\n");
     printf("5. Listar todos os Livros\n");
+    printf("6.Listar Livors não Emprestados\n");
     printf("0. Sair\n");
 
     printf("Escolha uma opção: ");
@@ -73,33 +77,60 @@ void cadastrarLivro(Livro *livros, int *totalLivros)
     scanf(" %[^\n]", livros[*totalLivros].autor);
 
     livros[*totalLivros].emprestado = 0; // Inicializa como disponível
-    salvarDados(livros, *totalLivros+1);
+    salvarDados(livros, *totalLivros + 1);
     (*totalLivros)++;
     printf("Livro cadastrado com sucesso!\n");
 }
 
-void emprestarLivro(Livro *livros, int totalLivros){
+void emprestarLivro(Livro *livros, int totalLivros)
+{
     //@JuhManuh2004 está desenvolvendo
-}
+     listarNaoEmprestados(livros, totalLivros);
+    int indiceLivro = 0;
+    printf("\n\nEscolha o livro que deseja pegar emprestado pelo codigo dele: ");
+    scanf("%d", &indiceLivro);
 
+    livros[indiceLivro - 1].emprestado = 1;
+    salvarDados(livros, totalLivros);
+    printf("\n\nLivro Emprestado!");
+}
+void listarNaoEmprestados(Livro *livros, int *totalLivros){
+   
+    int emprestados = 0;
+
+    printf("\n==============================================\n");
+    printf("\n\n----Todos os Livros Emprestados----\n\n");
+
+    for (int i = 0; i < totalLivros; i++)
+    {
+        if (livros[i].emprestado == 0)
+        {
+            printf("\n\n%d°. Livro", ++emprestados);
+            printf("\n Codigo de cadastro do livro: %d \n", livros[i].codigo);
+            printf("ISBN: %s \nTítulo: %s, \nAutor: %s \n", livros[i].isbn, livros[i].titulo, livros[i].autor);
+        }
+        printf("\n\n\n");
+    }
+    printf("\n==============================================\n");
+}
 void devolverLivro(Livro *livros, int totalLivros)
 {
     // mudar a val do emprestado pra 0
 
-    listarEmprestados(livros,totalLivros);
-    int indiceLivro=0; 
+    listarEmprestados(livros, totalLivros);
+    int indiceLivro = 0;
     printf("\n\nEscolha o livro que deseja devolver pelo codigo dele: ");
-    scanf("%d",&indiceLivro);
-    
-    livros[indiceLivro-1].emprestado = 0;
-    salvarDados(livros,totalLivros);
+    scanf("%d", &indiceLivro);
+
+    livros[indiceLivro - 1].emprestado = 0;
+    salvarDados(livros, totalLivros);
     printf("\n\nLivro Devolvido!");
 }
 
 void listarEmprestados(Livro *livros, int totalLivros)
 {
 
-int emprestados =0;
+    int emprestados = 0;
 
     printf("\n==============================================\n");
     printf("\n\n----Todos os Livros Emprestados----\n\n");
@@ -344,7 +375,6 @@ void salvarDados(Livro *livros, int totalLivros)
     fclose(fp);
 }
 
-
 void carregarDados(Livro *livros, int *totalLivros)
 {
     FILE *fp = fopen("todosOsLivros.txt", "r");
@@ -376,5 +406,6 @@ void carregarDados(Livro *livros, int *totalLivros)
 void limparBufferEntrada()
 {
     int c;
-    while ((c = getchar()) != '\n' && c != EOF);
+    while ((c = getchar()) != '\n' && c != EOF)
+        ;
 }
