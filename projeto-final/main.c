@@ -84,33 +84,36 @@ void cadastrarLivro(Livro *livros, int *totalLivros)
 
 void listarnaoemprestados(Livro *livros, int *totalLivros)
 {
+   int emprestados = 0;
+
     printf("\n==============================================\n");
-    printf("\n\n----Todos os Livros Dispóniveis----\n\n");
-    // mostrar os livros de val emprestado = 0
+    printf("\n\n----Todos os Livros Disponível----\n\n");
+
     for (int i = 0; i < totalLivros; i++)
     {
-        if (livros[i].emprestado == 0)
-        { // Pra mostar disponiveis
-            printf("\n%d°. Livro\n", i + 1);
+        if (livros[i].emprestado == 1)
+        {
+            printf("\n\n%d°. Livro", ++emprestados);
+            printf("\n Codigo de cadastro do livro: %d \n", livros[i].codigo);
             printf("ISBN: %s \nTítulo: %s, \nAutor: %s \n", livros[i].isbn, livros[i].titulo, livros[i].autor);
-            printf("\n\n\n");
         }
+        printf("\n\n\n");
     }
     printf("\n==============================================\n");
 }
-void emprestarLivro(Livro *livros, int totalLivros)
+void emprestarLivro(Livro *livros, int *totalLivros)
 {
     listarnaoemprestados(livros, totalLivros);
     int indiceLivro = 0;
     printf("\n\nEscolha o livro que deseja devolver pelo codigo dele: ");
     scanf("%d", &indiceLivro);
 
-    livros[indiceLivro - 1].emprestado = 0;
+    livros[indiceLivro - 1].emprestado = 1;
     salvarDados(livros, totalLivros);
-    printf("\n\nLivro Devolvido!");
+    printf("\n\nLivro Emprestado!");
 }
 
-void listarEmprestados(Livro *livros, int totalLivros)
+void listarEmprestados(Livro *livros, int *totalLivros)
 {
 
     int emprestados = 0;
@@ -131,7 +134,7 @@ void listarEmprestados(Livro *livros, int totalLivros)
     printf("\n==============================================\n");
 }
 
-void listarTodososLivros(Livro *livros, int totalLivros)
+void listarTodososLivros(Livro *livros, int *totalLivros)
 {
 
     printf("\n==============================================\n");
@@ -145,7 +148,7 @@ void listarTodososLivros(Livro *livros, int totalLivros)
     printf("\n==============================================\n");
 }
 
-void devolverLivro(Livro *livros, int totalLivros)
+void devolverLivro(Livro *livros, int *totalLivros)
 {
     // mudar a val do emprestado pra 0
 
@@ -159,7 +162,7 @@ void devolverLivro(Livro *livros, int totalLivros)
     printf("\n\nLivro Devolvido!");
 }
 
-void salvarDados(Livro *livros, int totalLivros)
+void salvarDados(Livro *livros, int *totalLivros)
 {
     FILE *fp = fopen("todosOsLivros.txt", "w");
     if (fp == NULL)

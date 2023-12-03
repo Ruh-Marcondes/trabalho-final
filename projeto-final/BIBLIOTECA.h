@@ -40,7 +40,7 @@ void cadastrarLivro(Livro *livros, int *totalLivros);
  *    @param livros Um ponteiro para o array de livros
  *    @param totalLivros um ponteiro para o total de livros
  **/
-void emprestarLivro(Livro *livros, int totalLivros);
+void emprestarLivro(Livro *livros, int *totalLivros);
 
 
 /**
@@ -49,7 +49,7 @@ void emprestarLivro(Livro *livros, int totalLivros);
  *    @param livros Um ponteiro para o array de livros
  *    @param totalLivros um ponteiro para o total de livros
  **/
-void devolverLivro(Livro *livros, int totalLivros);
+void devolverLivro(Livro *livros, int *totalLivros);
 
 
 /**
@@ -58,7 +58,7 @@ void devolverLivro(Livro *livros, int totalLivros);
  *    @param livros Um ponteiro para o array de livros
  *    @param totalLivros um ponteiro para o total de livros
  **/
-void listarEmprestados(Livro *livros, int totalLivros);
+void listarEmprestados(Livro *livros, int *totalLivros);
 
 
 
@@ -76,7 +76,7 @@ void listarnaoemprestados(Livro *livros, int *totalLivros);
  *    @param livros Um ponteiro para o array de livros
  *    @param totalLivros um ponteiro para o total de livros
  **/
-void listarTodososLivros(Livro *livros, int totalLivros);
+void listarTodososLivros(Livro *livros, int *totalLivros);
 
 
 /**
@@ -85,7 +85,7 @@ void listarTodososLivros(Livro *livros, int totalLivros);
  *    @param livros Um ponteiro para o array de livros
  *    @param totalLivros um ponteiro para o total de livros
  **/
-void salvarDados(Livro *livros, int totalLivros);
+void salvarDados(Livro *livros, int *totalLivros);
 
 
 /**
