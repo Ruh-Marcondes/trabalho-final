@@ -74,3 +74,5 @@ biblioteca.exe
 :computer: [Ruahma Marcondes](https://github.com/Ruh-Marcondes)
 :computer: [Julia Emanuella](https://github.com/JuhManuh2004)
 :pound:  [Gabrielle Avelino](https://github.com/GabiAvelinoBS)
+
+## [📹: Vídeo do Projeto](https://youtu.be/15TwZK1jKk8) 👈
